@@ -4,6 +4,7 @@ import CardList from './components/CardList/CardList';
 import Card from './components/Card/Card';
 import { apiService } from './services/api';
 import type { Pokemon } from './types/types';
+import styles from './App.module.css';
 
 type AppProps = Record<string, never>;
 
@@ -12,6 +13,7 @@ interface AppState {
   isLoading: boolean;
   error: string | null;
   searchTerm: string;
+  forceError: boolean;
 }
 
 class App extends Component<AppProps, AppState> {
@@ -23,6 +25,7 @@ class App extends Component<AppProps, AppState> {
       isLoading: true,
       error: null,
       searchTerm: savedTerm,
+      forceError: false,
     };
   }
 
@@ -42,7 +45,6 @@ class App extends Component<AppProps, AppState> {
         searchTerm,
       });
 
-      // Сохраняем поисковый запрос
       if (searchTerm) {
         localStorage.setItem('searchTerm', searchTerm);
       } else {
@@ -62,18 +64,16 @@ class App extends Component<AppProps, AppState> {
   };
 
   throwError = (): void => {
-    throw new Error('Test Error Boundary');
+    this.setState({ forceError: true });
   };
 
   renderContent() {
     const { items, searchTerm } = this.state;
 
-    // Если есть поисковый запрос и найден 1 покемон
     if (searchTerm && items.length === 1) {
       return <Card item={items[0]} compact={false} />;
     }
 
-    // Во всех остальных случаях (список или нет результатов)
     return (
       <CardList
         items={items}
@@ -84,18 +84,22 @@ class App extends Component<AppProps, AppState> {
   }
 
   render() {
+    if (this.state.forceError) {
+      throw new Error('Test Error Boundary');
+    }
+
     return (
-      <div className="app">
-        <div className="top-section">
+      <div className={styles.app}>
+        <div className={styles['top-section']}>
           <Search
             onSearch={this.handleSearch}
             initialValue={this.state.searchTerm}
           />
         </div>
 
-        <div className="main-section">{this.renderContent()}</div>
+        <div className={styles['main-section']}>{this.renderContent()}</div>
 
-        <button className="error-button" onClick={this.throwError}>
+        <button className={styles['error-button']} onClick={this.throwError}>
           Test Error Boundary
         </button>
       </div>
