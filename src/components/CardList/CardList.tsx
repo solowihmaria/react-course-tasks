@@ -18,7 +18,12 @@ class CardList extends Component<CardListProps> {
     }
 
     if (isLoading) {
-      return <div className={styles['loader']}>Loading...</div>;
+      return (
+        <div className={styles['loader']}>
+          <div className={styles['spinner']} />
+          <p>Loading...</p>
+        </div>
+      );
     }
 
     if (items.length === 0) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import type { ReactNode } from 'react';
+import styles from './ErrorBoundary.module.css';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -27,7 +28,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="error-fallback">
+        <div className={styles['error-fallback']}>
           <h2>Something went wrong!</h2>
           <p>{this.state.errorMessage}</p>
           <button onClick={() => window.location.reload()}>Reload Page</button>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './Search.module.css';
 
 interface SearchProps {
   onSearch: (term: string) => void;
@@ -33,7 +34,7 @@ class Search extends Component<SearchProps, SearchState> {
 
   render() {
     return (
-      <div className="search-container">
+      <div className={styles['search-container']}>
         <input
           type="text"
           value={this.state.searchTerm}

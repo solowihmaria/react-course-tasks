@@ -1,0 +1,35 @@
+.error-fallback {
+  padding: 40px;
+  background-color: var(--lemon-light);
+  border: 2px solid var(--lemon-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 10px var(--lemon-shadow);
+  text-align: center;
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+.error-fallback h2 {
+  color: var(--text-main);
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+
+.error-fallback p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.error-fallback button {
+  padding: 10px 20px;
+  background-color: var(--lemon);
+  border: 2px solid var(--lemon-border);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.error-fallback button:hover {
+  background-color: var(--lemon-dark);
+}
