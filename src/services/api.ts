@@ -36,13 +36,20 @@ class ApiService {
     };
   }
 
-  async fetchItems(searchTerm: string = ''): Promise<Pokemon[]> {
+  async fetchItems(
+    searchTerm: string = '',
+    page: number = 1,
+    limit: number = 10
+  ): Promise<{
+    items: Pokemon[];
+    totalCount: number;
+  }> {
+    const offset = (page - 1) * limit;
     const url = searchTerm
       ? `${this.baseUrl}/${searchTerm.toLowerCase().trim()}`
-      : `${this.baseUrl}?limit=10`;
+      : `${this.baseUrl}?limit=${limit}&offset=${offset}`;
 
     try {
-      // Для тестирования ошибок
       if (searchTerm === 'TEST_API_ERROR') {
         throw new Error('Simulated API error for testing');
       }
@@ -51,29 +58,30 @@ class ApiService {
 
       if (!response.ok) {
         if (response.status === 404 && searchTerm) {
-          return [];
+          return { items: [], totalCount: 0 };
         }
         throw new Error(this.getErrorMessage(response.status, searchTerm));
       }
 
       const data = await response.json();
 
-      // Одиночный покемон
       if (searchTerm) {
-        return [
-          {
-            name: data.name,
-            url: `${this.baseUrl}/${data.id}`,
-            id: data.id,
-            height: data.height,
-            weight: data.weight,
-            sprites: data.sprites,
-            types: data.types,
-          },
-        ];
+        return {
+          items: [
+            {
+              name: data.name,
+              url: `${this.baseUrl}/${data.id}`,
+              id: data.id,
+              height: data.height,
+              weight: data.weight,
+              sprites: data.sprites,
+              types: data.types,
+            },
+          ],
+          totalCount: 1,
+        };
       }
 
-      // Список покемонов
       const listResponse = data as PokeApiResponse;
       const pokemons = await Promise.all(
         listResponse.results.map((pokemon) =>
@@ -81,7 +89,10 @@ class ApiService {
         )
       );
 
-      return pokemons;
+      return {
+        items: pokemons,
+        totalCount: listResponse.count,
+      };
     } catch (error) {
       console.error('API request failed:', error);
       throw error;
