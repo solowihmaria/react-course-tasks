@@ -22,6 +22,7 @@
 
 .error-fallback button {
   padding: 10px 20px;
+  font-family: 'Press Start 2P', monospace;
   background-color: var(--lemon);
   border: 2px solid var(--lemon-border);
   border-radius: 8px;

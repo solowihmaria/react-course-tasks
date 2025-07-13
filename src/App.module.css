@@ -4,7 +4,6 @@
   align-items: center;
   min-height: 100vh;
   background-color: #fffef5;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
   padding: 24px;
 }
 
@@ -30,6 +29,7 @@
 
 .error-button {
   display: block;
+  font-family: 'Press Start 2P', monospace;
   margin: 32px auto;
   padding: 10px 20px;
   font-size: 0.95rem;

@@ -8,4 +8,8 @@
   --text-main: #333;
   --text-muted: #666;
   --bg-white: #fff;
+
+  --disabled-bg: #eee;
+  --disabled-border: #ccc;
+  --disabled-text: #888;
 }
