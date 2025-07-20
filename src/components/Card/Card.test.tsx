@@ -25,4 +25,16 @@ describe('Card Component', () => {
     const image = screen.getByAltText('pikachu');
     expect(image).toHaveAttribute('src', '/placeholder-pokemon.png');
   });
+
+  it('uses fallback 0 when height and weight are undefined', () => {
+    const mock = {
+      ...pikachuMock,
+      height: undefined,
+      weight: undefined,
+    };
+
+    render(<Card item={mock} compact={false} />);
+    expect(screen.getByText('Height: 0m')).toBeInTheDocument();
+    expect(screen.getByText('Weight: 0kg')).toBeInTheDocument();
+  });
 });
