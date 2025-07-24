@@ -1,0 +1,30 @@
+.header {
+  background-color: var(--lemon);
+  border-bottom: 2px solid var(--lemon-border);
+  box-shadow: 0 2px 4px var(--lemon-shadow);
+  padding: 1rem 2rem;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.link {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  background-color: var(--lemon-dark);
+  color: var(--text-main);
+}
+
+.link:active {
+  transform: translateY(1px);
+}
