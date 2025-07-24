@@ -1,0 +1,18 @@
+.footer {
+  background-color: var(--lemon);
+  border-top: 2px solid var(--lemon-border);
+  box-shadow: 0 -2px 4px var(--lemon-shadow);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content p {
+  color: var(--text-main);
+  margin: 0;
+  font-size: 0.9rem;
+}
