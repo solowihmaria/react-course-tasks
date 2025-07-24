@@ -1,0 +1,9 @@
+@import './colors.css';
+@import './normalize.css';
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  background-color: #fffef5;
+  color: var(--text-main);
+}
