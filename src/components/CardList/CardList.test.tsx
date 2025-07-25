@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import CardList from './CardList';
+import { CardList } from './CardList';
 import { pikachuMock, minimalPokemonMock } from '../../test-utils/mockPokemon';
 
 describe('CardList Component', () => {
