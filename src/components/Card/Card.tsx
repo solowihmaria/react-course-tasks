@@ -4,13 +4,19 @@ import type { Pokemon } from '../../types/types';
 interface CardProps {
   item: Pokemon;
   compact?: boolean;
+  onClick?: () => void;
 }
 
-export const Card = ({ item, compact = false }: CardProps) => {
-  // вариант,когда список всех
+export const Card = ({ item, compact = false, onClick }: CardProps) => {
+  // Компактный вариант (для списка)
   if (compact) {
     return (
-      <div className={styles['card-compact']}>
+      <div
+        className={styles['card-compact']}
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
+      >
         <img
           src={item.sprites?.front_default || '/placeholder-pokemon.png'}
           alt={item.name}
@@ -26,7 +32,7 @@ export const Card = ({ item, compact = false }: CardProps) => {
     );
   }
 
-  // вариант,когда ищем конкретного
+  // Детальный вариант
   return (
     <div className={styles['card-detailed']}>
       <img

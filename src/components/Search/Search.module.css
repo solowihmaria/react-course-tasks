@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   gap: 12px;
-  padding: 20px;
   background-color: var(--lemon-light);
 }
 

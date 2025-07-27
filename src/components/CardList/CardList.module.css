@@ -1,13 +1,19 @@
 .card-list {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  justify-content: center;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.loader,
+@media (min-width: 768px) {
+  .card-list {
+    justify-content: flex-start;
+  }
+}
+
 .error-message,
 .no-results {
   text-align: center;
@@ -20,40 +26,4 @@
   box-shadow: 0 2px 6px var(--lemon-shadow);
   margin: 20px auto;
   max-width: 400px;
-}
-
-.loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-align: center;
-  padding: 20px;
-  font-size: 1.1rem;
-  color: var(--text-main);
-  background-color: var(--lemon-light);
-  border: 2px dashed var(--lemon-border);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px var(--lemon-shadow);
-  margin: 20px auto;
-  max-width: 400px;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid var(--lemon-border);
-  border-top: 4px solid var(--lemon-dark);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
