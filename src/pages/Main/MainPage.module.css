@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.leftContainer {
+  flex: 1;
+  transition: width 0.3s ease;
+}
+
+.leftContainer.withDetails {
+  width: 60%;
+  cursor: pointer;
+}
+
+.rightContainer {
+  width: 40%;
+  border-left: 1px solid #eee;
+  background: white;
+  position: relative;
+}
