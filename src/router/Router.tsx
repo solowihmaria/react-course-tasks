@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Navigate,
+} from 'react-router-dom';
 import { Layout } from '../components/Layout/Layout';
 import { MainPage } from '../pages/Main/MainPage';
 import { AboutPage } from '../pages/About/AboutPage';
@@ -14,7 +19,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <Navigate to="/1" replace />,
+      },
+      {
+        path: '/:page',
         element: <MainPage />,
+        children: [
+          {
+            path: ':pokemonId',
+          },
+        ],
       },
       {
         path: '/about',
