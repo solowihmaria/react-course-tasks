@@ -12,4 +12,6 @@
   --disabled-bg: #eee;
   --disabled-border: #ccc;
   --disabled-text: #888;
+
+  --error: #cc1d1d;
 }

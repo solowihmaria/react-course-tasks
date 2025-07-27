@@ -1,4 +1,4 @@
-.app {
+.leftSide {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,10 +7,10 @@
   padding: 24px;
 }
 
-.top-section {
+.topSection {
   width: 100%;
   max-width: 800px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   background-color: var(--lemon-light);
   border: 2px solid var(--lemon-border);
   border-radius: 12px;
@@ -18,7 +18,7 @@
   box-shadow: 0 4px 8px var(--lemon-shadow);
 }
 
-.main-section {
+.mainSection {
   width: 100%;
   max-width: 800px;
   background-color: #fff;

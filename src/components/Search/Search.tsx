@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styles from './Search.module.css';
 
 interface SearchProps {
@@ -6,52 +6,26 @@ interface SearchProps {
   initialValue?: string;
 }
 
-interface SearchState {
-  searchTerm: string;
-}
+export const Search = ({ onSearch, initialValue = '' }: SearchProps) => {
+  const [searchTerm, setSearchTerm] = useState(initialValue);
 
-class Search extends Component<SearchProps, SearchState> {
-  constructor(props: SearchProps) {
-    super(props);
-    this.state = {
-      searchTerm: props.initialValue || '',
-    };
-  }
+  const handleSearch = () => onSearch(searchTerm.trim());
 
-  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ searchTerm: e.target.value });
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') handleSearch();
   };
 
-  handleSearch = (): void => {
-    this.props.onSearch(this.state.searchTerm);
-  };
-
-  handleKeyPress = (e: React.KeyboardEvent): void => {
-    if (e.key === 'Enter') {
-      this.handleSearch();
-    }
-  };
-
-  render() {
-    return (
-      <div className={styles['search-container']}>
-        <input
-          type="text"
-          value={this.state.searchTerm}
-          onChange={this.handleInputChange}
-          onKeyPress={this.handleKeyPress}
-          placeholder="Search Pokémon..."
-          aria-label="Search Pokémon"
-        />
-        <button
-          onClick={this.handleSearch}
-          disabled={this.state.searchTerm.trim() === ''}
-        >
-          Search
-        </button>
-      </div>
-    );
-  }
-}
-
-export default Search;
+  return (
+    <div className={styles['search-container']}>
+      <input
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder="Search Pokémon..."
+      />
+      <button onClick={handleSearch} disabled={!searchTerm.trim()}>
+        Search
+      </button>
+    </div>
+  );
+};

@@ -1,7 +1,7 @@
 import type { Pokemon, PokeApiResponse } from '../types/types';
 
 class ApiService {
-  private baseUrl: string = 'https://pokeapi.co/api/v2/pokemon';
+  public baseUrl: string = 'https://pokeapi.co/api/v2/pokemon';
 
   private getErrorMessage(status: number, searchTerm: string): string {
     const errorMessages: Record<number, string> = {
@@ -39,7 +39,7 @@ class ApiService {
   async fetchItems(
     searchTerm: string = '',
     page: number = 1,
-    limit: number = 10
+    limit: number = 8
   ): Promise<{
     items: Pokemon[];
     totalCount: number;

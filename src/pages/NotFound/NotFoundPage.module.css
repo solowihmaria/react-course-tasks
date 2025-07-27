@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: var(--lemon-light);
+  padding: 2rem;
+}
+
+.content {
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+  background-color: var(--bg-white);
+  border: 4px solid var(--lemon-border);
+  box-shadow: 8px 8px 0 var(--lemon-shadow);
+  position: relative;
+}
+
+.title {
+  font-size: 4rem;
+  color: var(--lemon-dark);
+  margin: 0;
+  text-shadow: 3px 3px 0 var(--text-main);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-top: 0;
+}
+
+.message {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 2rem 0;
+}
+
+.homeLink {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--lemon);
+  color: var(--text-main);
+  border: 2px solid var(--lemon-border);
+  box-shadow: 4px 4px 0 var(--lemon-shadow);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.homeLink:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--lemon-shadow);
+  background-color: var(--lemon-dark);
+  text-decoration: none;
+}
+
+.pokeball {
+  width: 80px;
+  height: 80px;
+  margin: 2rem auto;
+  position: relative;
+  animation: wobble 1.5s infinite alternate;
+}
+
+.top {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background-color: var(--error);
+  border: 3px solid var(--text-main);
+  border-radius: 40px 40px 0 0;
+  top: 0;
+}
+
+.bottom {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background-color: var(--primary);
+  border: 3px solid var(--text-main);
+  border-radius: 0 0 40px 40px;
+  bottom: 0;
+}
+
+.center {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 3px solid var(--text-main);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.center::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: var(--primary);
+  border: 2px solid var(--text-main);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes wobble {
+  from {
+    transform: rotate(-10deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
