@@ -4,6 +4,7 @@ import {
   Outlet,
   Navigate,
 } from 'react-router-dom';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '../components/Layout/Layout';
 import { MainPage } from '../pages/Main/MainPage';
 import { AboutPage } from '../pages/About/AboutPage';
@@ -12,9 +13,11 @@ import { NotFoundPage } from '../pages/NotFound/NotFoundPage';
 const router = createBrowserRouter([
   {
     element: (
-      <Layout>
-        <Outlet />
-      </Layout>
+      <ErrorBoundary>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </ErrorBoundary>
     ),
     children: [
       {

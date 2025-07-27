@@ -16,3 +16,19 @@
   margin: 0;
   font-size: 0.9rem;
 }
+
+.errorButton {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  background-color: var(--lemon-light);
+  color: var(--text-main);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: opacity 0.2s;
+}
+
+.errorButton:hover {
+  opacity: 0.9;
+}
