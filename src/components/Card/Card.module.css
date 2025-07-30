@@ -1,9 +1,9 @@
 .card-compact,
 .card-detailed {
-  border: 2px solid var(--lemon-border);
-  background-color: var(--lemon-light);
+  border: 2px solid var(--color-primary-border);
+  background-color: var(--color-primary-lighter);
   border-radius: 12px;
-  box-shadow: 0 4px 8px var(--lemon-shadow);
+  box-shadow: 0 4px 8px var(--color-primary-shadow);
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
 .card-compact:hover,
 .card-detailed:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px var(--lemon-shadow-dark);
+  box-shadow: 0 6px 12px var(--color-primary-shadow);
 }
 
 .card-compact {
@@ -22,8 +22,8 @@
   cursor: pointer;
   background: linear-gradient(
     135deg,
-    var(--lemon-light) 0%,
-    var(--lemon-lighter) 100%
+    var(--color-primary-lighter) 0%,
+    var(--color-primary-lighter) 100%
   );
 }
 

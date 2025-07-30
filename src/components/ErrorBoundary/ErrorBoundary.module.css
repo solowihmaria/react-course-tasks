@@ -1,9 +1,9 @@
 .error-fallback {
   padding: 40px;
-  background-color: var(--lemon-light);
-  border: 2px solid var(--lemon-border);
+  background-color: var(--color-primary-lighter);
+  border: 2px solid var(--color-primary-border);
   border-radius: 16px;
-  box-shadow: 0 4px 10px var(--lemon-shadow);
+  box-shadow: 0 4px 10px var(--color-primary-shadow);
   text-align: center;
   max-width: 500px;
   margin: 40px auto;
@@ -23,8 +23,8 @@
 .error-fallback button {
   padding: 10px 20px;
   font-family: 'Press Start 2P', monospace;
-  background-color: var(--lemon);
-  border: 2px solid var(--lemon-border);
+  background-color: var(--color-primary-light);
+  border: 2px solid var(--color-primary-border);
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -32,5 +32,5 @@
 }
 
 .error-fallback button:hover {
-  background-color: var(--lemon-dark);
+  background-color: var(--color-primary);
 }
