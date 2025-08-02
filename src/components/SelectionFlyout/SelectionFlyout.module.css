@@ -36,6 +36,7 @@
   border: none;
   cursor: pointer;
   font-weight: 500;
+  background-color: var(--color-primary-light);
   transition: all 0.2s ease;
 }
 
@@ -45,7 +46,6 @@
 
 .downloadButton {
   background-color: var(--color-primary);
-  color: white;
 }
 
 .downloadButton:hover {
