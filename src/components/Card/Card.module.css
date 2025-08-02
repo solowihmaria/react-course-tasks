@@ -15,6 +15,7 @@
 }
 
 .card-compact {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 150px;
@@ -93,6 +94,37 @@
   margin: 4px 0;
   font-size: 0.95rem;
   color: var(--text-muted);
+}
+
+.checkbox {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.card-compact.selected {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-light) 0%,
+    var(--color-primary-lighter) 100%
+  );
+  border-color: var(--color-primary);
+}
+
+.card-compact:hover .checkbox {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .checkbox {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Адаптивность */
