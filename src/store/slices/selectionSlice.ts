@@ -1,30 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { Pokemon } from '../../types/types';
 
 interface SelectionState {
   selectedIds: Record<number, boolean>;
+  selectedPokemons: Pokemon[];
 }
 
 const initialState: SelectionState = {
   selectedIds: {},
+  selectedPokemons: [],
 };
 
 const selectionSlice = createSlice({
   name: 'selection',
   initialState,
   reducers: {
-    togglePokemon: (state, action: PayloadAction<number>) => {
-      const id = action.payload;
-      const { [id]: _, ...rest } = state.selectedIds; // eslint-disable-line @typescript-eslint/no-unused-vars
+    togglePokemon: (state, action: PayloadAction<Pokemon>) => {
+      const pokemon = action.payload;
+      const id = pokemon.id ?? 0;
 
       if (state.selectedIds[id]) {
-        state.selectedIds = rest;
+        const { [id]: _, ...restIds } = state.selectedIds; // eslint-disable-line @typescript-eslint/no-unused-vars
+        state.selectedIds = restIds;
+        state.selectedPokemons = state.selectedPokemons.filter(
+          (p) => p.id !== id
+        );
       } else {
-        state.selectedIds = { ...rest, [id]: true };
+        state.selectedIds = { ...state.selectedIds, [id]: true };
+        state.selectedPokemons = [...state.selectedPokemons, pokemon];
       }
     },
     clearAll: (state) => {
       state.selectedIds = {};
+      state.selectedPokemons = [];
     },
   },
 });

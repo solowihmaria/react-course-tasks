@@ -1,12 +1,9 @@
 import styles from './SelectionFlyout.module.css';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { clearAll } from '../../store/slices/selectionSlice';
+import { useSelectionActions } from '../../hooks/useSelectionActions';
 
 export const SelectionFlyout = () => {
-  const selectedIds = useAppSelector((state) => state.selection.selectedIds);
-  const dispatch = useAppDispatch();
-
-  const selectedCount = Object.keys(selectedIds).length;
+  const { selectedCount, handleDownload, handleClearAll } =
+    useSelectionActions();
 
   if (selectedCount === 0) return null;
 
@@ -14,13 +11,14 @@ export const SelectionFlyout = () => {
     <div className={styles.flyout}>
       <div className={styles.flyoutContent}>
         <span className={styles.counter}>
-          {selectedCount} {selectedCount === 1 ? 'item' : 'items'} selected
+          {selectedCount} {selectedCount === 1 ? 'pokemon' : 'pokemons'}{' '}
+          selected
         </span>
 
         <div className={styles.buttons}>
           <button
             className={styles.button}
-            onClick={() => dispatch(clearAll())}
+            onClick={handleClearAll}
             aria-label="Unselect all"
           >
             Unselect All
@@ -28,7 +26,7 @@ export const SelectionFlyout = () => {
 
           <button
             className={`${styles.button} ${styles.downloadButton}`}
-            onClick={() => console.log('Download clicked')} // пока заглушка
+            onClick={handleDownload}
             aria-label="Download selected"
           >
             Download CSV

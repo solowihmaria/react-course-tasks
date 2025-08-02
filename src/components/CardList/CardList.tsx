@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader';
-import { SelectionFlyout } from '../SelectionFlyout/SelectionFlyout';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { togglePokemon } from '../../store/slices/selectionSlice';
 import type { Pokemon } from '../../types/types';
@@ -21,8 +20,8 @@ export const CardList = ({ items, isLoading, error }: CardListProps) => {
   const dispatch = useAppDispatch();
   const selectedIds = useAppSelector((state) => state.selection.selectedIds);
 
-  const handleToggleSelect = (id: number) => {
-    dispatch(togglePokemon(id));
+  const handleToggleSelect = (pokemon: Pokemon) => {
+    dispatch(togglePokemon(pokemon));
   };
 
   if (error) {
@@ -51,7 +50,6 @@ export const CardList = ({ items, isLoading, error }: CardListProps) => {
           />
         ))}
       </div>
-      <SelectionFlyout />
     </div>
   );
 };

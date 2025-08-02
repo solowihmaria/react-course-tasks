@@ -6,7 +6,7 @@ interface CardProps {
   compact?: boolean;
   onClick?: () => void;
   isSelected?: boolean;
-  onToggleSelect?: (id: number) => void;
+  onToggleSelect?: (pokemon: Pokemon) => void;
 }
 
 export const Card = ({
@@ -18,7 +18,7 @@ export const Card = ({
 }: CardProps) => {
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    onToggleSelect?.(item.id ?? 0);
+    onToggleSelect?.(item);
   };
 
   if (compact) {
