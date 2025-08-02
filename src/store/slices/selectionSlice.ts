@@ -15,10 +15,13 @@ const selectionSlice = createSlice({
   reducers: {
     togglePokemon: (state, action: PayloadAction<number>) => {
       const id = action.payload;
-      state.selectedIds = {
-        ...state.selectedIds,
-        [id]: !state.selectedIds[id],
-      };
+      const { [id]: _, ...rest } = state.selectedIds; // eslint-disable-line @typescript-eslint/no-unused-vars
+
+      if (state.selectedIds[id]) {
+        state.selectedIds = rest;
+      } else {
+        state.selectedIds = { ...rest, [id]: true };
+      }
     },
     clearAll: (state) => {
       state.selectedIds = {};
