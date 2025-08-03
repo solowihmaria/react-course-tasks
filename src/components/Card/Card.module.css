@@ -1,9 +1,9 @@
 .card-compact,
 .card-detailed {
-  border: 2px solid var(--lemon-border);
-  background-color: var(--lemon-light);
+  border: 2px solid var(--color-primary-border);
+  background-color: var(--color-primary-lighter);
   border-radius: 12px;
-  box-shadow: 0 4px 8px var(--lemon-shadow);
+  box-shadow: 0 4px 8px var(--color-primary-shadow);
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -11,10 +11,11 @@
 .card-compact:hover,
 .card-detailed:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 12px var(--lemon-shadow-dark);
+  box-shadow: 0 6px 12px var(--color-primary-shadow);
 }
 
 .card-compact {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 150px;
@@ -22,8 +23,8 @@
   cursor: pointer;
   background: linear-gradient(
     135deg,
-    var(--lemon-light) 0%,
-    var(--lemon-lighter) 100%
+    var(--color-primary-lighter) 0%,
+    var(--color-primary-lighter) 100%
   );
 }
 
@@ -93,6 +94,37 @@
   margin: 4px 0;
   font-size: 0.95rem;
   color: var(--text-muted);
+}
+
+.checkbox {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.card-compact.selected {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-light) 0%,
+    var(--color-primary-lighter) 100%
+  );
+  border-color: var(--color-primary);
+}
+
+.card-compact:hover .checkbox {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .checkbox {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* Адаптивность */

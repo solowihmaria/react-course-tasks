@@ -1,7 +1,7 @@
 .footer {
-  background-color: var(--lemon);
-  border-top: 2px solid var(--lemon-border);
-  box-shadow: 0 -2px 4px var(--lemon-shadow);
+  background-color: var(--color-primary-light);
+  border-top: 2px solid var(--color-primary-border);
+  box-shadow: 0 -2px 4px var(--color-primary-shadow);
   padding: 1.5rem;
   text-align: center;
 }
@@ -20,7 +20,7 @@
 .errorButton {
   margin-top: 0.5rem;
   padding: 0.6rem 1rem;
-  background-color: var(--lemon-light);
+  background-color: var(--color-primary-lighter);
   color: var(--text-main);
   border: none;
   border-radius: 4px;

@@ -3,6 +3,7 @@ import { CardList } from '../../../../components/CardList/CardList';
 import { Pagination } from '../../../../components/Pagination/Pagination';
 import { Search } from '../../../../components/Search/Search';
 import { usePokemonList } from '../../../../hooks/usePokemonList';
+import { SelectionFlyout } from '../../../../components/SelectionFlyout/SelectionFlyout';
 import styles from './LeftSide.module.css';
 
 export const LeftSide = ({ currentPage }: { currentPage: number }) => {
@@ -31,6 +32,7 @@ export const LeftSide = ({ currentPage }: { currentPage: number }) => {
           disabled={!!pokemonId}
         />
         <CardList items={items} isLoading={isLoading} error={error} />
+        <SelectionFlyout allPokemons={items} />
       </div>
     </div>
   );

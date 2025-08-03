@@ -1,17 +1,35 @@
 :root {
-  --lemon-light: #fefee3;
-  --lemon: #fdfd96;
-  --lemon-dark: #fce205;
-  --lemon-border: #e1db50;
-  --lemon-shadow: rgba(252, 226, 5, 0.3);
+  --color-primary: #fce205;
+  --color-primary-light: #fdfd96;
+  --color-primary-lighter: #fefee3;
+  --color-primary-border: #e1db50;
+  --color-primary-shadow: rgba(252, 226, 5, 0.3);
+  --color-bg: #fff;
 
   --text-main: #333;
   --text-muted: #666;
-  --bg-white: #fff;
 
   --disabled-bg: #eee;
   --disabled-border: #ccc;
   --disabled-text: #888;
 
   --error: #cc1d1d;
+}
+
+[data-theme='dark'] {
+  --color-primary: #ffd54f;
+  --color-primary-light: #e49226;
+  --color-primary-lighter: #2c2c2c;
+  --color-primary-border: #d39905;
+  --color-primary-shadow: rgba(255, 213, 79, 0.25);
+  --color-bg: #2b2929;
+
+  --text-main: #fefefe;
+  --text-muted: #aaa;
+
+  --disabled-bg: #2e2e2e;
+  --disabled-border: #444;
+  --disabled-text: #777;
+
+  --error: #ff6f61;
 }

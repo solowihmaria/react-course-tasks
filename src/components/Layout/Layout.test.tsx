@@ -1,15 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { Layout } from './Layout';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '../../contexts/ThemeProvider';
 
 describe('Layout Component', () => {
-  it('renders header, footer and children', () => {
+  it('renders header, footer and outlet content', () => {
     render(
-      <MemoryRouter>
-        <Layout>
-          <div>Test Content</div>
-        </Layout>
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<div>Test Content</div>} />
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     expect(screen.getByText(/home/i)).toBeInTheDocument();

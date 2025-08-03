@@ -1,12 +1,12 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet,
   Navigate,
 } from 'react-router-dom';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '../components/Layout/Layout';
 import { MainPage } from '../pages/Main/MainPage';
+import { RightSide } from '../pages/Main/parts/RightSide/RightSide';
 import { AboutPage } from '../pages/About/AboutPage';
 import { NotFoundPage } from '../pages/NotFound/NotFoundPage';
 
@@ -14,9 +14,7 @@ const router = createBrowserRouter([
   {
     element: (
       <ErrorBoundary>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Layout />
       </ErrorBoundary>
     ),
     children: [
@@ -30,6 +28,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: ':pokemonId',
+            element: <RightSide />,
           },
         ],
       },

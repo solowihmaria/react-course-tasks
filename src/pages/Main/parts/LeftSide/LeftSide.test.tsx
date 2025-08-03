@@ -1,6 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../../../store/store';
 import { LeftSide } from './LeftSide';
 import * as usePokemonListHook from '../../../../hooks/usePokemonList';
 
@@ -26,27 +28,26 @@ describe('LeftSide Component', () => {
     vi.clearAllMocks();
   });
 
-  it('renders Search, Pagination and CardList components', () => {
+  const renderWithProviders = () =>
     render(
-      <MemoryRouter initialEntries={['/1']}>
-        <Routes>
-          <Route path="/:page" element={<LeftSide currentPage={1} />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/1']}>
+          <Routes>
+            <Route path="/:page" element={<LeftSide currentPage={1} />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
+
+  it('renders Search, Pagination and CardList components', () => {
+    renderWithProviders();
 
     expect(screen.getByPlaceholderText(/search pokémon/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
   it('calls handleSearch when search button is clicked', async () => {
-    render(
-      <MemoryRouter initialEntries={['/1']}>
-        <Routes>
-          <Route path="/:page" element={<LeftSide currentPage={1} />} />
-        </Routes>
-      </MemoryRouter>
-    );
+    renderWithProviders();
 
     const input = screen.getByPlaceholderText(/search pokémon/i);
     const button = screen.getByRole('button', { name: /search/i });

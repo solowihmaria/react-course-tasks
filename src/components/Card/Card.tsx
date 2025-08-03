@@ -5,18 +5,39 @@ interface CardProps {
   item: Pokemon;
   compact?: boolean;
   onClick?: () => void;
+  isSelected?: boolean;
+  onToggleSelect?: (pokemon: Pokemon) => void;
 }
 
-export const Card = ({ item, compact = false, onClick }: CardProps) => {
-  // Компактный вариант (для списка)
+export const Card = ({
+  item,
+  compact = false,
+  onClick,
+  isSelected = false,
+  onToggleSelect,
+}: CardProps) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    onToggleSelect?.(item);
+  };
+
   if (compact) {
     return (
       <div
-        className={styles['card-compact']}
+        className={`${styles['card-compact']} ${isSelected ? styles.selected : ''}`}
         onClick={onClick}
         role="button"
         tabIndex={0}
       >
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={handleCheckboxChange}
+          className={styles.checkbox}
+          onClick={(e) => e.stopPropagation()}
+          aria-label={`Select ${item.name}`}
+        />
+
         <img
           src={item.sprites?.front_default || '/placeholder-pokemon.png'}
           alt={item.name}
@@ -32,7 +53,6 @@ export const Card = ({ item, compact = false, onClick }: CardProps) => {
     );
   }
 
-  // Детальный вариант
   return (
     <div className={styles['card-detailed']}>
       <img

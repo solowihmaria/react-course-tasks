@@ -14,7 +14,7 @@ export interface PokemonSprites {
 export interface Pokemon {
   name: string;
   url: string;
-  id?: number;
+  id: number;
   sprites?: PokemonSprites;
   height?: number;
   weight?: number;

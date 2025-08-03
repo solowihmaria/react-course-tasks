@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import styles from './Header.module.css';
 
 export const Header = () => {
@@ -11,6 +12,7 @@ export const Header = () => {
         <Link to="/about" className={styles.link}>
           About
         </Link>
+        <ThemeToggle />
       </nav>
     </header>
   );

@@ -4,6 +4,6 @@
 body {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
-  background-color: #fffef5;
+  background-color: var(--color-bg);
   color: var(--text-main);
 }
