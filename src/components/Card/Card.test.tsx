@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Card } from './Card';
 import {
   pikachuMock,
@@ -36,5 +37,23 @@ describe('Card Component', () => {
     render(<Card item={mock} compact={false} />);
     expect(screen.getByText('Height: 0m')).toBeInTheDocument();
     expect(screen.getByText('Weight: 0kg')).toBeInTheDocument();
+  });
+
+  it('calls onToggleSelect when checkbox is clicked', async () => {
+    const onToggleSelect = vi.fn();
+    render(
+      <Card
+        item={pikachuMock}
+        compact={true}
+        isSelected={false}
+        onToggleSelect={onToggleSelect}
+      />
+    );
+
+    const checkbox = screen.getByRole('checkbox');
+    await userEvent.click(checkbox);
+
+    expect(onToggleSelect).toHaveBeenCalledTimes(1);
+    expect(onToggleSelect).toHaveBeenCalledWith(pikachuMock);
   });
 });

@@ -1,12 +1,40 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
 import { CardList } from './CardList';
 import { pikachuMock, minimalPokemonMock } from '../../test-utils/mockPokemon';
+import { configureStore } from '@reduxjs/toolkit';
+import selectionReducer, {
+  togglePokemon,
+} from '../../store/slices/selectionSlice';
+
+const mockDispatch = vi.fn();
+vi.mock('../../store/hooks', async () => {
+  const actual =
+    await vi.importActual<typeof import('../../store/hooks')>(
+      '../../store/hooks'
+    );
+  return {
+    ...actual,
+    useAppDispatch: () => mockDispatch,
+  };
+});
 
 const renderWithProviders = (ui: React.ReactElement, { route = '/' } = {}) => {
+  const store = configureStore({
+    reducer: {
+      selection: selectionReducer,
+    },
+    preloadedState: {
+      selection: {
+        selectedIds: {},
+        selectedPokemons: [],
+      },
+    },
+  });
+
   return render(
     <Provider store={store}>
       <MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>
@@ -39,5 +67,26 @@ describe('CardList Component', () => {
       <CardList items={items} isLoading={false} error={null} />
     );
     expect(screen.getAllByRole('img')).toHaveLength(2);
+  });
+
+  it('calls togglePokemon when checkbox is clicked', async () => {
+    renderWithProviders(
+      <CardList items={[pikachuMock]} isLoading={false} error={null} />
+    );
+
+    const checkbox = screen.getByRole('checkbox');
+    await userEvent.click(checkbox);
+
+    expect(mockDispatch).toHaveBeenCalledWith(togglePokemon(pikachuMock));
+  });
+
+  it('navigates to detail page on card click', async () => {
+    renderWithProviders(
+      <CardList items={[pikachuMock]} isLoading={false} error={null} />,
+      { route: '/1' }
+    );
+
+    const card = screen.getByRole('button');
+    await userEvent.click(card);
   });
 });
