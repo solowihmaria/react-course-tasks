@@ -1,7 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { apiService } from '../../../../services/api';
-import { useEffect, useState } from 'react';
-import type { Pokemon } from '../../../../types/types';
+import { useGetPokemonDetailsQuery } from '../../../../store/slices/pokemonApi';
 import { Card } from '../../../../components/Card/Card';
 import { Loader } from '../../../../components/Loader/Loader';
 import styles from './RightSide.module.css';
@@ -9,27 +7,14 @@ import styles from './RightSide.module.css';
 export const RightSide = () => {
   const { page, pokemonId } = useParams();
   const navigate = useNavigate();
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (!pokemonId) return;
-
-    const fetchPokemonData = async () => {
-      setIsLoading(true);
-      try {
-        const pokemonUrl = `${apiService.baseUrl}/${pokemonId}`;
-        const data = await apiService.fetchPokemonDetails(pokemonUrl);
-        setPokemon(data);
-      } catch (error) {
-        console.error('Failed to fetch pokemon details:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPokemonData();
-  }, [pokemonId]);
+  const {
+    data: pokemon,
+    isLoading,
+    isError,
+  } = useGetPokemonDetailsQuery(Number(pokemonId), {
+    skip: !pokemonId,
+  });
 
   const handleClose = () => navigate(`/${page}`);
 
@@ -46,6 +31,8 @@ export const RightSide = () => {
       </button>
       {isLoading ? (
         <Loader />
+      ) : isError ? (
+        <div className={styles.error}>Error loading Pokémon details</div>
       ) : (
         pokemon && <Card item={pokemon} compact={false} />
       )}
