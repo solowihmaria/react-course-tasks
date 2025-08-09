@@ -1,42 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import {
+  useGetPokemonsQuery,
+  useInvalidatePokemonCacheMutation,
+} from '../store/slices/pokemonApi';
+import { useLocalStorage } from './useLocalStorage';
 import { useNavigate } from 'react-router-dom';
-import { apiService } from '../services/api';
-import type { Pokemon } from '../types/types';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useApiError } from './useApiError';
 
 export const usePokemonList = (initialPage = 1) => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm', '');
-  const [items, setItems] = useState<Pokemon[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { getErrorMessage } = useApiError();
+  const [invalidateCache] = useInvalidatePokemonCacheMutation();
 
-  const fetchItems = async (term: string = '', page: number = 1) => {
-    setIsLoading(true);
-    setError(null);
+  const {
+    data: pokemonData,
+    isLoading,
+    isFetching,
+    error,
+  } = useGetPokemonsQuery({
+    page: currentPage,
+    searchTerm: searchTerm || undefined,
+    limit: 8,
+  });
 
-    try {
-      const { items, totalCount } = await apiService.fetchItems(term, page, 8);
-      setItems(items);
-      setTotalPages(Math.ceil(totalCount / 8) || 1);
-      setSearchTerm(term);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
-      setItems([]);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleRefreshAll = async () => {
+    await invalidateCache({});
   };
-
-  useEffect(() => {
-    fetchItems(searchTerm, currentPage);
-  }, [currentPage]);
 
   const handleSearch = (term: string) => {
     setCurrentPage(1);
-    fetchItems(term.trim(), 1);
+    setSearchTerm(term.trim());
   };
 
   const handlePageChange = (page: number) => {
@@ -45,13 +40,14 @@ export const usePokemonList = (initialPage = 1) => {
   };
 
   return {
-    items,
-    isLoading,
-    error,
+    items: pokemonData?.items || [],
+    isLoading: isLoading || isFetching,
+    error: error ? getErrorMessage(error) : null,
     searchTerm,
     currentPage,
-    totalPages,
+    totalPages: Math.ceil((pokemonData?.totalCount || 0) / 8),
     handleSearch,
     handlePageChange,
+    refreshAll: handleRefreshAll,
   };
 };
