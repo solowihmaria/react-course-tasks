@@ -1,22 +1,33 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { RightSide } from './RightSide';
-import { apiService } from '../../../../services/api';
 import { pikachuMock } from '../../../../test-utils/mockPokemon';
+import { useGetPokemonDetailsQuery } from '../../../../store/slices/pokemonApi';
 
-vi.mock('../../../../services/api', () => ({
-  apiService: {
-    baseUrl: 'https://pokeapi.co/api/v2/pokemon',
-    fetchPokemonDetails: vi.fn(),
-  },
+vi.mock('../../../../store/slices/pokemonApi', () => ({
+  useGetPokemonDetailsQuery: vi.fn(),
 }));
 
 describe('RightSide component', () => {
-  const mockFetchDetails = apiService.fetchPokemonDetails as jest.Mock;
+  const mockUseGetPokemonDetailsQuery = vi.mocked(useGetPokemonDetailsQuery);
+
+  const mockQueryResult = (overrides = {}) => ({
+    data: undefined,
+    isLoading: false,
+    isError: false,
+    error: undefined,
+    refetch: vi.fn(),
+    currentData: undefined,
+    isFetching: false,
+    isSuccess: false,
+    isUninitialized: false,
+    status: 'fulfilled',
+    ...overrides,
+  });
 
   beforeEach(() => {
-    vi.restoreAllMocks();
+    mockUseGetPokemonDetailsQuery.mockReturnValue(mockQueryResult());
   });
 
   it('does not render if pokemonId is missing', () => {
@@ -32,7 +43,12 @@ describe('RightSide component', () => {
   });
 
   it('renders details when pokemonId is present', async () => {
-    mockFetchDetails.mockResolvedValue(pikachuMock);
+    mockUseGetPokemonDetailsQuery.mockReturnValue(
+      mockQueryResult({
+        data: pikachuMock,
+        isSuccess: true,
+      })
+    );
 
     render(
       <MemoryRouter initialEntries={['/1/25']}>
@@ -42,15 +58,16 @@ describe('RightSide component', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/loading/i)).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
-    });
+    expect(await screen.findByText(/PIKACHU/i)).toBeInTheDocument();
   });
 
   it('closes on button click', async () => {
-    mockFetchDetails.mockResolvedValue(pikachuMock);
+    mockUseGetPokemonDetailsQuery.mockReturnValue(
+      mockQueryResult({
+        data: pikachuMock,
+        isSuccess: true,
+      })
+    );
 
     render(
       <MemoryRouter initialEntries={['/1/25']}>
@@ -61,9 +78,8 @@ describe('RightSide component', () => {
       </MemoryRouter>
     );
 
-    await screen.findByText(/pikachu/i);
-    fireEvent.click(screen.getByRole('button'));
-
-    await screen.findByText(/back to list/i);
+    await screen.findByText(/PIKACHU/i);
+    fireEvent.click(screen.getByRole('button', { name: /close details/i }));
+    expect(await screen.findByText(/back to list/i)).toBeInTheDocument();
   });
 });
