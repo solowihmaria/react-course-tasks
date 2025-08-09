@@ -32,7 +32,7 @@ export const LeftSide = ({ currentPage }: { currentPage: number }) => {
           disabled={!!pokemonId}
         />
         <CardList items={items} isLoading={isLoading} error={error} />
-        <SelectionFlyout allPokemons={items} />
+        <SelectionFlyout />
       </div>
     </div>
   );
