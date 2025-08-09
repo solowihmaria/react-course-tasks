@@ -26,7 +26,7 @@ export const usePokemonList = (initialPage = 1) => {
   });
 
   const handleRefreshAll = async () => {
-    await invalidateCache();
+    await invalidateCache({});
   };
 
   const handleSearch = (term: string) => {
