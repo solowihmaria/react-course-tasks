@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { useGetPokemonsQuery } from '../store/slices/pokemonApi';
+import {
+  useGetPokemonsQuery,
+  useInvalidatePokemonCacheMutation,
+} from '../store/slices/pokemonApi';
 import { useLocalStorage } from './useLocalStorage';
 import { useNavigate } from 'react-router-dom';
 import { useApiError } from './useApiError';
@@ -9,6 +12,7 @@ export const usePokemonList = (initialPage = 1) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm', '');
   const { getErrorMessage } = useApiError();
+  const [invalidateCache] = useInvalidatePokemonCacheMutation();
 
   const {
     data: pokemonData,
@@ -20,6 +24,10 @@ export const usePokemonList = (initialPage = 1) => {
     searchTerm: searchTerm || undefined,
     limit: 8,
   });
+
+  const handleRefreshAll = async () => {
+    await invalidateCache();
+  };
 
   const handleSearch = (term: string) => {
     setCurrentPage(1);
@@ -40,5 +48,6 @@ export const usePokemonList = (initialPage = 1) => {
     totalPages: Math.ceil((pokemonData?.totalCount || 0) / 8),
     handleSearch,
     handlePageChange,
+    refreshAll: handleRefreshAll,
   };
 };

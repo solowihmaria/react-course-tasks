@@ -91,6 +91,14 @@ export const pokemonApi = createApi({
       },
     }),
 
+    invalidatePokemonCache: builder.mutation<
+      { success: boolean },
+      Record<string, never>
+    >({
+      queryFn: () => ({ data: { success: true } }),
+      invalidatesTags: ['Pokemon'],
+    }),
+
     getPokemonDetails: builder.query<Pokemon, number>({
       query: (id) => `pokemon/${id}`,
 
@@ -109,4 +117,8 @@ export const pokemonApi = createApi({
   }),
 });
 
-export const { useGetPokemonsQuery, useGetPokemonDetailsQuery } = pokemonApi;
+export const {
+  useGetPokemonsQuery,
+  useGetPokemonDetailsQuery,
+  useInvalidatePokemonCacheMutation,
+} = pokemonApi;

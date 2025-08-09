@@ -8,6 +8,7 @@ import styles from './LeftSide.module.css';
 
 export const LeftSide = ({ currentPage }: { currentPage: number }) => {
   const { pokemonId } = useParams();
+
   const {
     items,
     isLoading,
@@ -16,6 +17,7 @@ export const LeftSide = ({ currentPage }: { currentPage: number }) => {
     totalPages,
     handleSearch,
     handlePageChange,
+    refreshAll,
   } = usePokemonList(currentPage);
 
   return (
@@ -25,12 +27,23 @@ export const LeftSide = ({ currentPage }: { currentPage: number }) => {
       </div>
 
       <div className={styles.mainSection}>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-          disabled={!!pokemonId}
-        />
+        <div className={styles.controls}>
+          <button
+            onClick={() => refreshAll()}
+            disabled={isLoading}
+            className={styles.refreshButton}
+            aria-label="Refresh list"
+          >
+            ⟳ Refresh
+          </button>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            disabled={!!pokemonId}
+          />
+        </div>
         <CardList items={items} isLoading={isLoading} error={error} />
         <SelectionFlyout />
       </div>
