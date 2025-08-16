@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './NotFoundPage.module.css';
 
 export const NotFoundPage = () => {
@@ -14,9 +15,9 @@ export const NotFoundPage = () => {
         <p className={styles.message}>
           The Pokémon you&apos;re looking for fled away!
         </p>
-        <a href="/" className={styles.homeLink}>
+        <Link href="/1" className={styles.homeLink}>
           Back to Pokédex
-        </a>
+        </Link>
       </div>
     </div>
   );
