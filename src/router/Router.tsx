@@ -7,7 +7,7 @@ import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import { Layout } from '../components/Layout/Layout';
 import { MainPage } from '../pages/Main/MainPage';
 import { RightSide } from '../pages/Main/parts/RightSide/RightSide';
-import { AboutPage } from '../pages/About/AboutPage';
+
 import { NotFoundPage } from '../pages/NotFound/NotFoundPage';
 
 const router = createBrowserRouter([
@@ -32,10 +32,7 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: '/about',
-        element: <AboutPage />,
-      },
+
       {
         path: '/404',
         element: <NotFoundPage />,
