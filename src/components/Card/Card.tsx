@@ -1,5 +1,6 @@
 import styles from './Card.module.css';
 import type { Pokemon } from '../../types/types';
+import Image from 'next/image';
 
 interface CardProps {
   item: Pokemon;
@@ -38,11 +39,14 @@ export const Card = ({
           aria-label={`Select ${item.name}`}
         />
 
-        <img
+        <Image
           src={item.sprites?.front_default || '/placeholder-pokemon.png'}
           alt={item.name}
+          width={80}
+          height={80}
           className={styles['pokemon-thumbnail']}
         />
+
         <div className={styles['pokemon-info']}>
           <h4>{item.name}</h4>
           <p className={styles.types}>
@@ -55,11 +59,14 @@ export const Card = ({
 
   return (
     <div className={styles['card-detailed']}>
-      <img
+      <Image
         src={item.sprites?.front_default || '/placeholder-pokemon.png'}
         alt={item.name}
+        width={120}
+        height={120}
         className={styles['pokemon-image']}
       />
+
       <div className={styles['pokemon-details']}>
         <h3>{item.name.toUpperCase()}</h3>
         <p>Type: {item.types?.map((t) => t.type.name).join(', ')}</p>

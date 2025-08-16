@@ -1,4 +1,5 @@
 import styles from './AboutPage.module.css';
+import Image from 'next/image';
 
 export const AboutPage = () => {
   return (
@@ -7,9 +8,11 @@ export const AboutPage = () => {
         <h1 className={styles.title}>About Pokémon App</h1>
 
         <div className={styles.author}>
-          <img
+          <Image
             src="https://github.com/solowihmaria.png"
             alt="Maria Solovykh"
+            width={64}
+            height={64}
             className={styles.avatar}
           />
           <div>
