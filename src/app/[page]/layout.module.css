@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  height: 100%;
+  height: 100vh;
 }
 
 .leftContainer {
@@ -9,13 +9,14 @@
 }
 
 .leftContainer.withDetails {
-  width: 60%;
+  width: 80%;
   cursor: pointer;
 }
 
 .rightContainer {
-  width: 40%;
+  width: 20%;
   border-left: 1px solid #eee;
   background: white;
   position: relative;
+  overflow: hidden;
 }

@@ -52,7 +52,7 @@ export const CardList = ({
             compact={true}
             isSelected={!!selectedIds[item.id ?? 0]}
             onToggleSelect={handleToggleSelect}
-            onClick={() => router.push(`/${currentPage}/${item.id}`)} // ✅ заменили navigate
+            onClick={() => router.push(`/${currentPage}/${item.id}`)}
           />
         ))}
       </div>
