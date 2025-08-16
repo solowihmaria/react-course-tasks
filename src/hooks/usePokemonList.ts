@@ -1,15 +1,16 @@
+'use client';
 import { useState } from 'react';
 import {
   useGetPokemonsQuery,
   useInvalidatePokemonCacheMutation,
 } from '../store/slices/pokemonApi';
 import { useLocalStorage } from './useLocalStorage';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useApiError } from './useApiError';
 
 export const usePokemonList = (initialPage = 1) => {
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const navigate = useNavigate();
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm', '');
   const { getErrorMessage } = useApiError();
   const [invalidateCache] = useInvalidatePokemonCacheMutation();
@@ -36,7 +37,7 @@ export const usePokemonList = (initialPage = 1) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    navigate(`/${page}`);
+    router.push(`/${page}`);
   };
 
   return {

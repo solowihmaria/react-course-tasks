@@ -1,4 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
+'use client';
+import { useRouter } from 'next/navigation';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
@@ -10,12 +11,17 @@ interface CardListProps {
   items: Pokemon[];
   isLoading: boolean;
   error: string | null;
+  currentPage: number;
   onItemClick?: (item: Pokemon) => void;
 }
 
-export const CardList = ({ items, isLoading, error }: CardListProps) => {
-  const navigate = useNavigate();
-  const { page } = useParams();
+export const CardList = ({
+  items,
+  isLoading,
+  error,
+  currentPage,
+}: CardListProps) => {
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
   const selectedIds = useAppSelector((state) => state.selection.selectedIds);
@@ -46,7 +52,7 @@ export const CardList = ({ items, isLoading, error }: CardListProps) => {
             compact={true}
             isSelected={!!selectedIds[item.id ?? 0]}
             onToggleSelect={handleToggleSelect}
-            onClick={() => navigate(`/${page}/${item.id}`)}
+            onClick={() => router.push(`/${currentPage}/${item.id}`)} // ✅ заменили navigate
           />
         ))}
       </div>
