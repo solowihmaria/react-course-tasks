@@ -4,6 +4,8 @@
     "about": "About"
   },
   "NotFound": {
-    "notFound": "Page not found"
+    "subtitle": "Page not found",
+    "message": "The Pokémon you're looking for fled away!",
+    "back": "Back to Pokédex"
   }
 }
