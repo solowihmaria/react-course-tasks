@@ -11,7 +11,7 @@ type PokeApiList = {
   results: { name: string; url: string }[];
 };
 
-// Серверная загрузка "статического" списка под конкретную страницу
+// Серверная загрузка списка под конкретную страницу
 async function fetchPokemonsServer(pageNum: number, limit: number) {
   const offset = (pageNum - 1) * limit;
 
@@ -49,10 +49,9 @@ export default async function PageLayout({
   params,
 }: {
   children: React.ReactNode;
-
-  params: Promise<{ page: string; pokemonId?: string }>;
+  params: Promise<{ locale: string; page: string }>;
 }) {
-  const { page, pokemonId } = await params;
+  const { page } = await params;
 
   const pageNum = Number(page);
   const isValidPage =
@@ -77,13 +76,10 @@ export default async function PageLayout({
     initialTotalCount = 0;
   }
 
-  const hasDetails = Boolean(pokemonId);
-
   return (
     <div className={styles.container}>
       <ClientShell
         pageNum={pageNum}
-        hasDetails={hasDetails}
         initialItems={initialItems}
         initialTotalCount={initialTotalCount}
         pageSize={PAGE_SIZE}

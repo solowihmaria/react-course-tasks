@@ -1,21 +1,24 @@
 import '../assets/styles/main.css';
+import type { Metadata } from 'next';
+import { Press_Start_2P } from 'next/font/google';
+
+export const metadata: Metadata = {
+  title: 'Pokémon App',
+};
+
+const pressStart = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
 }) {
   return (
-    <html lang={params.locale}>
-      <head>
-        <title>Pokémon App</title>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={pressStart.className}>
       <body>{children}</body>
     </html>
   );
