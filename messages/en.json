@@ -19,5 +19,10 @@
   },
   "LeftSide": {
     "refresh": "Refresh"
+  },
+  "About": {
+    "title": "About Pokémon App",
+    "description": "This application was created as part of the RS School React course. It uses the PokéAPI to display Pokémon information in a fun, interactive way.",
+    "link": "Visit RS School React Course"
   }
 }
