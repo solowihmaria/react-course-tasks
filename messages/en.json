@@ -1,0 +1,36 @@
+{
+  "Header": {
+    "home": "Home",
+    "about": "About"
+  },
+  "NotFound": {
+    "subtitle": "Page not found",
+    "message": "The Pokémon you're looking for fled away!",
+    "back": "Back to Pokédex"
+  },
+  "Search": {
+    "placeholder": "Search Pokémon...",
+    "button": "Search"
+  },
+  "Pagination": {
+    "prev": "Previous",
+    "next": "Next",
+    "pageInfo": "Page {currentPage} of {totalPages}"
+  },
+  "LeftSide": {
+    "refresh": "Refresh"
+  },
+  "About": {
+    "title": "About Pokémon App",
+    "description": "This application was created as part of the RS School React course. It uses the PokéAPI to display Pokémon information in a fun, interactive way.",
+    "link": "Visit RS School React Course"
+  },
+  "SelectionFlyout": {
+    "selected": "{count, plural, one {# pokemon selected} other {# pokemons selected}}",
+    "unselectAll": "Unselect All",
+    "download": "Download CSV"
+  },
+  "Loader": {
+    "loading": "Loading..."
+  }
+}

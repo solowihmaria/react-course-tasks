@@ -1,4 +1,6 @@
+'use client';
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import styles from './Search.module.css';
 
 interface SearchProps {
@@ -8,6 +10,7 @@ interface SearchProps {
 
 export const Search = ({ onSearch, initialValue = '' }: SearchProps) => {
   const [searchTerm, setSearchTerm] = useState(initialValue);
+  const t = useTranslations('Search');
 
   const handleSearch = () => onSearch(searchTerm.trim());
 
@@ -21,10 +24,10 @@ export const Search = ({ onSearch, initialValue = '' }: SearchProps) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Search Pokémon..."
+        placeholder={t('placeholder')}
       />
       <button onClick={handleSearch} disabled={!searchTerm.trim()}>
-        Search
+        {t('button')}
       </button>
     </div>
   );

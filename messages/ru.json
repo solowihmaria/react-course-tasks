@@ -1,0 +1,36 @@
+{
+  "Header": {
+    "home": "Главная",
+    "about": "О приложении"
+  },
+  "NotFound": {
+    "subtitle": "Страница не найдена",
+    "message": "Покемон, которого вы ищете, сбежал!",
+    "back": "Назад к Покедексу"
+  },
+  "Search": {
+    "placeholder": "Поиск Покемона...",
+    "button": "Найти"
+  },
+  "Pagination": {
+    "prev": "Назад",
+    "next": "Вперёд",
+    "pageInfo": "Страница {currentPage} из {totalPages}"
+  },
+  "LeftSide": {
+    "refresh": "Обновить"
+  },
+  "About": {
+    "title": "О приложении Pokémon",
+    "description": "Это приложение было создано в рамках курса React от RS School. Оно использует PokéAPI для отображения информации о покемонах в увлекательной, интерактивной форме.",
+    "link": "Перейти на курс React от RS School"
+  },
+  "SelectionFlyout": {
+    "selected": "{count, plural, one {Выбран # покемон} few {Выбрано # покемона} many {Выбрано # покемонов} other {Выбрано # покемона}}",
+    "unselectAll": "Убрать выделенные",
+    "download": "Скачать CSV"
+  },
+  "Loader": {
+    "loading": "Загрузка..."
+  }
+}
