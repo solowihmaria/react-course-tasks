@@ -7,8 +7,19 @@ import { Search } from '..//Search/Search';
 import { usePokemonList } from '../../hooks/usePokemonList';
 import { SelectionFlyout } from '../SelectionFlyout/SelectionFlyout';
 import styles from './LeftSide.module.css';
+import type { Pokemon } from '../../types/types';
 
-export const LeftSide = ({ currentPage }: { currentPage: number }) => {
+export const LeftSide = ({
+  currentPage,
+  initialItems,
+  initialTotalCount,
+  pageSize,
+}: {
+  currentPage: number;
+  initialItems: Pokemon[];
+  initialTotalCount: number;
+  pageSize: number;
+}) => {
   const t = useTranslations('LeftSide');
 
   const {
@@ -20,7 +31,12 @@ export const LeftSide = ({ currentPage }: { currentPage: number }) => {
     handleSearch,
     handlePageChange,
     refreshAll,
-  } = usePokemonList(currentPage);
+  } = usePokemonList({
+    initialPage: currentPage,
+    initialItems,
+    initialTotalCount,
+    pageSize,
+  });
 
   return (
     <div className={styles.leftSide}>
