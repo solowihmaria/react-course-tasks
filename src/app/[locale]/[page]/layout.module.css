@@ -1,20 +1,26 @@
 .container {
   display: flex;
   height: 100vh;
+  width: 100%;
 }
 
 .leftContainer {
-  flex: 1;
-  transition: width 0.3s ease;
+  width: 100%;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .leftContainer.withDetails {
   width: 80%;
-  cursor: pointer;
 }
 
 .rightContainer {
-  width: 20%;
-  position: relative;
+  width: 0;
   overflow: hidden;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.rightContainer.withDetails {
+  width: 20%;
 }

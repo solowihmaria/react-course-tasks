@@ -1,37 +1,30 @@
 'use client';
 
-import { useRouter } from '../../../i18n/navigation';
+import { useParams } from 'next/navigation';
 import { LeftSide } from '../../../components/LeftSide/LeftSide';
 import styles from './layout.module.css';
-
 import type { Pokemon } from '../../../types/types';
 
 export default function TwoColumnLayout({
   pageNum,
-  hasDetails,
   initialItems,
   initialTotalCount,
   pageSize,
   children,
 }: {
   pageNum: number;
-  hasDetails: boolean;
   initialItems: Pokemon[];
   initialTotalCount: number;
   pageSize: number;
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-
-  const handleMainClick = () => {
-    if (hasDetails) router.push(`/${pageNum}`);
-  };
+  const params = useParams();
+  const hasDetails = !!params?.pokemonId;
 
   return (
-    <>
+    <div className={styles.container}>
       <div
         className={`${styles.leftContainer} ${hasDetails ? styles.withDetails : ''}`}
-        onClick={handleMainClick}
       >
         <LeftSide
           currentPage={pageNum}
@@ -41,7 +34,11 @@ export default function TwoColumnLayout({
         />
       </div>
 
-      <div className={styles.rightContainer}>{children}</div>
-    </>
+      <div
+        className={`${styles.rightContainer} ${hasDetails ? styles.withDetails : ''}`}
+      >
+        {hasDetails && children}
+      </div>
+    </div>
   );
 }
