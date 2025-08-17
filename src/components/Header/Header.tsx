@@ -13,7 +13,7 @@ export const Header = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles.navLinks}>
-          <Link href="/" className={styles.link}>
+          <Link href="/1" className={styles.link}>
             {t('home')}
           </Link>
           <Link href="/about" className={styles.link}>

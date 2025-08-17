@@ -7,5 +7,17 @@
     "subtitle": "Page not found",
     "message": "The Pokémon you're looking for fled away!",
     "back": "Back to Pokédex"
+  },
+  "Search": {
+    "placeholder": "Search Pokémon...",
+    "button": "Search"
+  },
+  "Pagination": {
+    "prev": "Previous",
+    "next": "Next",
+    "pageInfo": "Page {currentPage} of {totalPages}"
+  },
+  "LeftSide": {
+    "refresh": "Refresh"
   }
 }

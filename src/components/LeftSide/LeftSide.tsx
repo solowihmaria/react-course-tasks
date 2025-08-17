@@ -1,4 +1,6 @@
 'use client';
+
+import { useTranslations } from 'next-intl';
 import { CardList } from '../CardList/CardList';
 import { Pagination } from '..//Pagination/Pagination';
 import { Search } from '..//Search/Search';
@@ -7,6 +9,8 @@ import { SelectionFlyout } from '../SelectionFlyout/SelectionFlyout';
 import styles from './LeftSide.module.css';
 
 export const LeftSide = ({ currentPage }: { currentPage: number }) => {
+  const t = useTranslations('LeftSide');
+
   const {
     items,
     isLoading,
@@ -32,7 +36,7 @@ export const LeftSide = ({ currentPage }: { currentPage: number }) => {
             className={styles.refreshButton}
             aria-label="Refresh list"
           >
-            ⟳ Refresh
+            ⟳ {t('refresh')}
           </button>
 
           <Pagination

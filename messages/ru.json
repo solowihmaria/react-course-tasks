@@ -7,5 +7,17 @@
     "subtitle": "Страница не найдена",
     "message": "Покемон, которого вы ищете, сбежал!",
     "back": "Назад к Покедексу"
+  },
+  "Search": {
+    "placeholder": "Поиск Покемона...",
+    "button": "Найти"
+  },
+  "Pagination": {
+    "prev": "Назад",
+    "next": "Вперёд",
+    "pageInfo": "Страница {currentPage} из {totalPages}"
+  },
+  "LeftSide": {
+    "refresh": "Обновить"
   }
 }
