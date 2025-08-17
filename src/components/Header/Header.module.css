@@ -7,7 +7,19 @@
 
 .nav {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
   gap: 1.5rem;
+}
+
+.navControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .link {
