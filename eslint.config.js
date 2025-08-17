@@ -41,5 +41,11 @@ export default tseslint.config(
         version: 'detect',
       },
     },
+  },
+  {
+    files: ['.next/**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/unified-signatures': 'off',
+    },
   }
 );

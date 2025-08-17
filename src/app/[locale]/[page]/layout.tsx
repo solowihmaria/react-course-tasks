@@ -4,14 +4,16 @@ import ClientShell from './TwoColumnLayout';
 
 const MAX_PAGE = 163;
 
-export default function PageLayout({
+export default async function PageLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { page: string; pokemonId?: string };
+  params: Promise<{ page: string; pokemonId?: string }>;
 }) {
-  const pageNum = Number(params.page);
+  const { page, pokemonId } = await params;
+
+  const pageNum = Number(page);
   const isValidPage =
     !isNaN(pageNum) &&
     Number.isInteger(pageNum) &&
@@ -22,7 +24,7 @@ export default function PageLayout({
     notFound();
   }
 
-  const hasDetails = Boolean(params.pokemonId);
+  const hasDetails = Boolean(pokemonId);
 
   return (
     <div className={styles.container}>

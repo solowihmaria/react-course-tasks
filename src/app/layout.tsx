@@ -1,15 +1,14 @@
-import { Providers } from './providers';
-import { Header } from '../components/Header/Header';
-import { Footer } from '../components/Footer/Footer';
 import '../assets/styles/main.css';
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
-    <html lang="en">
+    <html lang={params.locale}>
       <head>
         <title>Pokémon App</title>
         <link
@@ -17,13 +16,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
-        <Providers>
-          <Header />
-          <main className="main">{children}</main>
-          <Footer />
-        </Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

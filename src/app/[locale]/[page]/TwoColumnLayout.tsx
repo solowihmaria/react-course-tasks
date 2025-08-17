@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { LeftSide } from '../../components/LeftSide/LeftSide';
+import { LeftSide } from '../../../components/LeftSide/LeftSide';
 import styles from './layout.module.css';
 
 export default function TwoColumnLayout({

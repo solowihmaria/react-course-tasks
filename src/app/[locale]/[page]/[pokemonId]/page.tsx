@@ -1,15 +1,19 @@
-import { useNavigate, useParams } from 'react-router-dom';
+'use client';
+
+import { useParams, useRouter } from 'next/navigation';
 import { useGetPokemonDetailsQuery } from '../../../../store/slices/pokemonApi';
 import { Card } from '../../../../components/Card/Card';
 import { Loader } from '../../../../components/Loader/Loader';
 import styles from './RightSide.module.css';
-
 import { useApiError } from '../../../../hooks/useApiError';
 
-export const RightSide = () => {
-  const { page, pokemonId } = useParams();
-  const navigate = useNavigate();
+export default function RightSidePage() {
+  const params = useParams();
+  const router = useRouter();
   const { getErrorMessage } = useApiError();
+
+  const page = params?.page as string | undefined;
+  const pokemonId = params?.pokemonId as string | undefined;
 
   const {
     data: pokemon,
@@ -18,7 +22,9 @@ export const RightSide = () => {
     error,
   } = useGetPokemonDetailsQuery(Number(pokemonId), { skip: !pokemonId });
 
-  const handleClose = () => navigate(`/${page}`);
+  const handleClose = () => {
+    if (page) router.push(`/${page}`);
+  };
 
   if (!pokemonId) return null;
 
@@ -31,6 +37,7 @@ export const RightSide = () => {
       >
         ✕
       </button>
+
       {isLoading ? (
         <Loader />
       ) : isError ? (
@@ -40,4 +47,4 @@ export const RightSide = () => {
       )}
     </div>
   );
-};
+}
