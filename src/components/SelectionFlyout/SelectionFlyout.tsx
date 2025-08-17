@@ -19,18 +19,13 @@ export const SelectionFlyout = () => {
         </span>
 
         <div className={styles.buttons}>
-          <button
-            className={styles.button}
-            onClick={handleClearAll}
-            aria-label={t('ariaUnselectAll')}
-          >
+          <button className={styles.button} onClick={handleClearAll}>
             {t('unselectAll')}
           </button>
 
           <button
             className={`${styles.button} ${styles.downloadButton}`}
             onClick={handleDownload}
-            aria-label={t('ariaDownload')}
           >
             {t('download')}
           </button>
