@@ -15,8 +15,6 @@
 
 .rightContainer {
   width: 20%;
-  border-left: 1px solid #eee;
-  background: white;
   position: relative;
   overflow: hidden;
 }

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import styles from './AboutPage.module.css';
 
-export const AboutPage = () => {
+export default function AboutPage() {
   const t = useTranslations('About');
 
   return (
@@ -46,6 +46,4 @@ export const AboutPage = () => {
       </div>
     </div>
   );
-};
-
-export default AboutPage;
+}
