@@ -6,7 +6,7 @@ import {
   useInvalidatePokemonCacheMutation,
 } from '../store/slices/pokemonApi';
 import { useLocalStorage } from './useLocalStorage';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '../i18n/navigation';
 import { useApiError } from './useApiError';
 import type { Pokemon } from '../types/types';
 
@@ -81,7 +81,7 @@ export const usePokemonList = ({
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    router.push(`/${page}`); // позже переведём на next-intl createNavigation
+    router.push(`/${page}`);
   };
 
   return {

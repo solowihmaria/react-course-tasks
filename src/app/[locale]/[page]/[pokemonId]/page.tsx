@@ -1,6 +1,6 @@
 'use client';
-
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import { useRouter } from '../../../../i18n/navigation';
 import { useGetPokemonDetailsQuery } from '../../../../store/slices/pokemonApi';
 import { Card } from '../../../../components/Card/Card';
 import { Loader } from '../../../../components/Loader/Loader';

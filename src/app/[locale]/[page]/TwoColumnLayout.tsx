@@ -1,10 +1,9 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from '../../../i18n/navigation';
 import { LeftSide } from '../../../components/LeftSide/LeftSide';
 import styles from './layout.module.css';
 
-// берём общий тип из src/types/types, а не из ./layout
 import type { Pokemon } from '../../../types/types';
 
 export default function TwoColumnLayout({
@@ -25,7 +24,7 @@ export default function TwoColumnLayout({
   const router = useRouter();
 
   const handleMainClick = () => {
-    if (hasDetails) router.push(`/${pageNum}`); // позже переведём на createNavigation из next-intl
+    if (hasDetails) router.push(`/${pageNum}`);
   };
 
   return (
